@@ -36,8 +36,9 @@ class DeepEPCallback(Callback):
 
     def setup(self, trainer: pl.Trainer, pl_module: pl.LightningModule, stage: str) -> None:
         """Enable DeepEP if GPU is Ampere or Hopper"""
-        if torch.cuda.get_device_properties(0).major not in [8, 9]:
-            return
+        
+        #if torch.cuda.get_device_properties(0).major not in [8, 9]:
+        #    return
 
         if hasattr(trainer.model, "config") and isinstance(trainer.model.config, TransformerConfig):
             self._apply_deepep_cfgs(trainer.model.config)
